@@ -15,7 +15,6 @@ describe Customer do
   end
 
   describe 'Relationships' do
-
     it 'can have many rentals' do
       rentals = Rental.all
       expect(rentals.length).must_be :>=, 1

@@ -19,7 +19,7 @@ describe Movie do
     end
   end
 
-  it "requires a numnerice inventory count" do
+  it "requires a numeric inventory count" do
     movie.inventory = "one"
 
     expect(movie.valid?).must_equal false
