@@ -1,5 +1,4 @@
 class Rental < ApplicationRecord
   belongs_to :customer
-  belongs_to :movies
-
+  belongs_to :movie
 end
