@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe Movie do
-  let (:movie) { movies (:rats) }
+  let (:movie) { movies (:one) }
 
   it "can be created" do
    expect(movie.valid?).must_equal true
@@ -19,9 +19,18 @@ describe Movie do
     end
   end
 
-  it "requires a numnerice inventory count" do
+  it "requires a numeric inventory count" do
     movie.inventory = "one"
-
     expect(movie.valid?).must_equal false
+  end
+
+  describe "relationships" do
+      let (:movie) { movies (:one) }
+    it "has rentals" do
+      rentals = Rental.all
+    
+      expect (movie.rentals.length).must_be :>=, 1
+
+    end
   end
 end
