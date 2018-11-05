@@ -12,6 +12,17 @@ describe Customer do
     fields.each do |field|
       expect(customer).must_respond_to field
     end
-
   end
+
+  describe 'Relationships' do
+
+    it 'can have many rentals' do
+      rentals = Rental.all
+      expect(rentals.length).must_be :>=, 1
+      rentals.each do |rental|
+        expect(rental).must_be_instance_of Rental
+      end
+    end
+  end
+
 end
