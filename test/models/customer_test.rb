@@ -8,7 +8,7 @@ describe Customer do
   end
 
   it 'must have required fields' do
-    fields = [:name, :registered_at,:address, :city, :state, :postal_code, :phone]
+    fields = [:name, :registered_at,:address, :city, :state, :postal_code, :phone, ]
     fields.each do |field|
       expect(customer).must_respond_to field
     end
@@ -24,4 +24,18 @@ describe Customer do
     end
   end
 
+  describe "customer#movies_checked_out_count method" do
+
+    it "returns correct amount of checked out movies by customer" do
+
+      rental = Rental.first
+      second_rental = Rental.last
+      customer.rentals << rental
+
+      expect(customer.movies_checked_out_count).must_equal 1
+      customer.rentals << second_rental
+
+      expect(customer.movies_checked_out_count).must_equal 2
+    end
+  end
 end
