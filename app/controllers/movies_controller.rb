@@ -10,10 +10,6 @@ class MoviesController < ApplicationController
   render json:  movie.as_json(only: [:title, :review, :release_date, :inventory]), status: :ok
   end
 
-  # def search(id)
-  #   movie = Movie.find_by(id: params[:movie_id])
-  # end
-
   def create
     movie = Movie.new(movie_params)
     movie.save!
