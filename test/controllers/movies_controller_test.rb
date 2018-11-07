@@ -37,7 +37,7 @@ describe MoviesController do
     end
 
     it 'can get a movie with a valid info' do
-      get movies_path(movies(:rats).id)
+      get movies_path(movies(:two).id)
       must_respond_with :success
     end
 
@@ -50,6 +50,7 @@ describe MoviesController do
     end
   end
 
+
   describe 'create' do
     let(:movie_hash) do
       {
@@ -61,13 +62,22 @@ describe MoviesController do
         }
       }
     end
+
     it 'creates a movie given correct params' do
       expect {
         post movies_path, params: movie_hash
       }.must_change 'Movie.count', 1
 
-      must_respond_with :ok
     end
+    it 'has an overview' do
+      post movies_path(movie_hash)
 
+      body = JSON.parse(response.body)
+
+      body.must_include 'overview'
+      #
+      # body.each do |movie|
+      #   movie(body).must_include 'overview'
+      end
+    end
   end
-end

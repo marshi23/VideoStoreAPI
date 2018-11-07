@@ -1,14 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   title: Blacksmith Of The Banished
   overview: The unexciting life of a boy will be permanently altered as a strange woman enters his life.
   release_date: 1979-01-18
   inventory: 10
 
 two:
-  id: 2
   title: Rats And Strangers
   overview: The childhood friend claims the woman is heir to an incredible fortune, all paperwork has been taken care of already, all there's left to do is sign them. Distrustful of both this situation and of this childhood friend, the woman somewhat gladly agrees to the proposal, but there's no time to waste, a decision had to be made quickly.
   release_date: 2012-09-25

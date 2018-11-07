@@ -18,9 +18,11 @@ class MoviesController < ApplicationController
   end
 
     def create
-      movie = Movie.new(movie_params)
-      movie.save!
-      render json: { id: movie.id }, status: :ok
+      @movie = Movie.new(movie_params)
+      @movie.save!
+      render json: {
+        id: @movie.id,
+        overview: @movie.overview }, status: :ok
     end
   end
 
