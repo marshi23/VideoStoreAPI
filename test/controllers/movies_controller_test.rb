@@ -37,7 +37,7 @@ describe MoviesController do
     end
 
     it 'can get a movie with a valid info' do
-      get movies_path(movies(:rats).id)
+      get movies_path(movies(:two).id)
       must_respond_with :success
     end
 
@@ -69,6 +69,15 @@ describe MoviesController do
       }.must_change 'Movie.count', 1
 
     end
+    it 'has an overview' do
+      post movies_path(movie_hash)
 
+      body = JSON.parse(response.body)
+
+      body.must_include 'overview'
+      #
+      # body.each do |movie|
+      #   movie(body).must_include 'overview'
+      end
+    end
   end
-end
