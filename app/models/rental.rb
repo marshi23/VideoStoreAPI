@@ -17,7 +17,7 @@ class Rental < ApplicationRecord
     end
   end
 
-  def checkin!
-
-  end
+  # def checkin!
+  #
+  # end
 end
