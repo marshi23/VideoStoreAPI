@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     resources :rentals
   end
 
-  post 'rentals/:id/checkout', to: 'rentals#checkout', as: 'checkout'
+  post 'rentals/checkout', to: 'rentals#checkout', as: 'checkout'
   # post 'rentals/:id/checkin', to: 'rental/checkin', as: 'checkin'
 end
