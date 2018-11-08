@@ -4,7 +4,7 @@ class Rental < ApplicationRecord
 
   validates :customer_id, presence: true
   validates :movie_id, presence: true
-  validates :checkin_date, presence: true
+  validates :checkout_date, presence: true
 
   def self.checkout!(customer_id, movie_id)
     rental = Rental.new(customer_id: customer_id, movie_id: movie_id)

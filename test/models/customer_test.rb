@@ -13,6 +13,14 @@ describe Customer do
       expect(customer).must_respond_to field
     end
   end
+  it "will fail with a missing field" do
+    fields = [:name, :registered_at,:address, :city, :state, :postal_code, :phone, ]
+    fields.each do |field|
+      customer[field] = nil
+      expect(customer.valid?).must_equal false
+    end
+  end
+
 
   describe 'Relationships' do
     it 'can have many rentals' do

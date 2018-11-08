@@ -4,6 +4,8 @@ one:
   checkin_date: 2018-11-05 12:50:27
   customer_id: 1
   movie_id: 1
+  checkout_date: 2018-10-29 11:45:27
+
 
 two:
   checkin_date: 2018-11-05 12:50:27
