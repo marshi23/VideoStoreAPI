@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  checkin_date: 2018-11-05 12:50:27
-  customer_id: 1
-  movie_id: 1
+  checkin_date: <%= Date.today + 1.week %>
+  checkout_date: <%= Date.today %>
+  customer: one
+  movie: one
 
 two:
-  checkin_date: 2018-11-05 12:50:27
-  customer_id: 1
-  movie_id: 1
+  checkin_date: <%= Date.today + 1.week %>
+  checkout_date: <%= Date.today %>
+  customer: two
+  movie: two
