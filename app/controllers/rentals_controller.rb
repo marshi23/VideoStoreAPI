@@ -23,8 +23,17 @@ class RentalsController < ApplicationController
   #   status :bad_request
   end
 
-  # def checkin
-  # end
+  def checkin
+
+    if rental_params[:customer_id] && rental_params[:movie_id]
+      rental = Rental.checkin!(rental_params[:customer_id], rental_params[:movie_id])
+      render json: { ok: true, message: 'Checkin successful!' }, status: :ok
+    else
+      render json: { ok: false, message: 'Unable to checkin' },
+      status: :not_found
+    end 
+
+  end
 
   private
   def rental_params
