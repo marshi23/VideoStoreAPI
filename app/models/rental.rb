@@ -9,33 +9,40 @@ class Rental < ApplicationRecord
   def self.checkout!(customer_id, movie_id)
     rental = Rental.new(customer_id: customer_id, movie_id: movie_id)
 
+    if Movie.find_by(id: movie_id) && Customer.find_by(id: customer_id)
+      transaction do
+        rental.checkout_date = Date.today
+        rental.checkin_date = Date.today + 1.week
 
-    transaction do
-      rental.checkout_date = Date.today
-      rental.checkin_date = Date.today + 1.week
-      rental.save!
+          rental.save!
+            customer_rental = rental.customer.rentals.count + 1
+            rental.customer.update(movies_checked_out_count: customer_rental)
 
-      customer_rental = rental.customer.rentals.count + 1
-      rental.customer.update(movies_checked_out_count: customer_rental)
+            rental.movie.decrement!(:inventory)
+            rental.movie.status = 'unavailable'
+      end
+      return rental
 
-      # customer.increment!(:movies_checked_out_count)
-      rental.movie.decrement!(:inventory)
-
-      rental.movie.status = 'unavailable'
-
+    else
+      raise ArgumentError, "Invalid customer or movie id"
     end
-    return rental
   end
+
 
   def self.checkin!(customer_id, movie_id)
     rental = Rental.find_by(customer_id: customer_id, movie_id: movie_id)
     movie = Movie.find_by(id: movie_id)
 
-    transaction do
-      movie.status = :available
-      rental.movie.increment!(:inventory)
-      rental.save!
+    if Movie.find_by(id: movie_id) && Customer.find_by(id: customer_id)
+      transaction do
+        movie.status = 'available'
+        rental.movie.increment!(:inventory)
+        rental.save!
+      end
+      return rental
+    else
+      raise ArgumentError, "Invalid customer or movie id"
     end
-    return rental
+
   end
 end

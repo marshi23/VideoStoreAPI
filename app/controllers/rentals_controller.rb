@@ -1,11 +1,7 @@
 class RentalsController < ApplicationController
 
-  def create
-    rental = Rental.new
-  end
-
   def checkout
-    
+
     if rental_params[:customer_id] && rental_params[:movie_id]
       rental = Rental.checkout!(rental_params[:customer_id], rental_params[:movie_id])
       render json: { ok: true, message: 'Checkout successful!' }, status: :ok
@@ -14,6 +10,8 @@ class RentalsController < ApplicationController
       status: :not_found
     end
 
+  rescue ArgumentError
+    render json: { ok: false, message: 'Unable to checkout: movie or customer does not exist' }, status: :not_found
   end
 
   def checkin
@@ -26,6 +24,8 @@ class RentalsController < ApplicationController
      status: :not_found
    end
 
+ rescue ArgumentError
+   render json: { ok: false, message: 'Unable to checkin: movie or customer does not exist' }, status: :not_found
   end
 
   private

@@ -5,21 +5,25 @@ describe RentalsController do
   describe "checkout" do
 
     it "has a working route" do
-      rental_id = 1
 
       rental_params = {
         customer_id: customers(:one)[:id], # id for first customer in customer yml
         movie_id: movies(:one)[:id] # id for first movie in movie yml
       }
 
-      post rentals_checkout_path(rental_id), { :params => rental_params }
+      post rentals_checkout_path, { :params => rental_params }
       must_respond_with :success
     end
 
 
-    it "returns a bad_request status if params is not given" do
-      rental_id = -1
-      post rentals_checkout_path(rental_id)
+    it "returns a bad_request status if invalid ids given" do
+
+      rental_params = {
+        customer_id: -1,
+        movie_id: -1
+      }
+
+      post rentals_checkout_path, { :params => rental_params }
 
       must_respond_with :not_found
 
@@ -31,12 +35,25 @@ describe RentalsController do
       rental_id = rentals(:one)[:id]
 
       rental_params = {
-        customer_id: customers(:one)[:id], # id for first customer in customer yml
-        movie_id: movies(:one)[:id] # id for first movie in movie yml
+        customer_id: customers(:one)[:id],
+        movie_id: movies(:one)[:id]
       }
-      # binding.pry
+
       post rentals_checkin_path(rental_id), { :params => rental_params }
       must_respond_with :success
+
+    end
+
+    it 'has a working route'do
+      rental_id = rentals(:one)[:id]
+
+      rental_params = {
+        customer_id: -1,
+        movie_id: -1
+      }
+
+      post rentals_checkin_path(rental_id), { :params => rental_params }
+      must_respond_with :not_found
 
     end
 
