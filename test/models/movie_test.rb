@@ -40,14 +40,15 @@ describe Movie do
     end
   end
 
-describe "relationships" do
-  let (:movie) { movies (:one) }
-  it "has rentals" do
+  describe "relationships" do
+    let (:movie) { movies (:one) }
 
-    # rentals = Rental.all
-binding.pry
-    expect (movie.rentals.length).must_be :>=, 1
+    it "has rentals" do
 
+       movie.rentals.new
+
+      expect (movie.rentals.length).must_be :>=, 1
+
+    end
   end
-end
 end
