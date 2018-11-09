@@ -11,6 +11,6 @@ Rails.application.routes.draw do
 
   post 'rentals/checkout', to: 'rentals#checkout', as: 'rentals_checkout'
 
-  post 'rentals/:id/checkin', to: 'rental#checkin', as: 'checkin'
+  post 'rentals/:id/checkin', to: 'rentals#checkin', as: 'rentals_checkin'
 
 end

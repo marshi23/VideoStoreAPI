@@ -28,8 +28,8 @@ class Rental < ApplicationRecord
   end
 
   def self.checkin!(customer_id, movie_id)
-    rental = rental.find_by.(customer_id: customer_id, movie_id: movie_id)
-
+    rental = Rental.find_by(customer_id: customer_id, movie_id: movie_id)
+    movie = Movie.find_by(id: movie_id)
 
     transaction do
       movie.status = :available
