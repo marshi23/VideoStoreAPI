@@ -4,7 +4,7 @@ class Rental < ApplicationRecord
 
   validates :customer_id, presence: true
   validates :movie_id, presence: true
-  validates :checkin_date, presence: true
+  validates :checkout_date, presence: true
 
   def self.checkout!(customer_id, movie_id)
     rental = Rental.new(customer_id: customer_id, movie_id: movie_id)
@@ -20,12 +20,19 @@ class Rental < ApplicationRecord
 
       # customer.increment!(:movies_checked_out_count)
       rental.movie.decrement!(:inventory)
+      rental.movie.status = 'unavailable'
 
     end
     return rental
   end
 
-  # def checkin!
+  # def self.checkin!(customer_id, movie_id)
+  #   rental = rental.find_by.(customer_id: customer_id, movie_id: movie_id)
+  #   binding.pry
   #
-  # end
-end
+  #   transaction do
+  #     movie.status = :available
+  #     rental.movie.increment!(:inventory)
+  #     rental.save!
+  #   end
+  end
