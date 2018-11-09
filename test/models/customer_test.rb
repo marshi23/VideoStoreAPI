@@ -31,19 +31,4 @@ describe Customer do
       end
     end
   end
-
-  describe "customer#movies_checked_out_count method" do
-
-    it "returns correct amount of checked out movies by customer" do
-
-      rental = Rental.first
-      second_rental = Rental.last
-      customer.rentals << rental
-
-      expect(customer.movies_checked_out_count).must_equal 1
-      customer.rentals << second_rental
-
-      expect(customer.movies_checked_out_count).must_equal 2
-    end
-  end
 end

@@ -12,6 +12,7 @@ class RentalsController < ApplicationController
       #   movie_id: rental_params[:movie_id])
 
       rental = Rental.checkout!(rental_params[:customer_id], rental_params[:movie_id])
+ 
       render json: { ok: true, message: 'Checkout successful!' }, status: :ok
 
     else
@@ -24,14 +25,6 @@ class RentalsController < ApplicationController
   end
 
   def checkin
-
-    if rental_params[:customer_id] && rental_params[:movie_id]
-      rental = Rental.checkin!(rental_params[:customer_id], rental_params[:movie_id])
-      render json: { ok: true, message: 'Checkin successful!' }, status: :ok
-    else
-      render json: { ok: false, message: 'Unable to checkin' },
-      status: :not_found
-    end 
 
   end
 
