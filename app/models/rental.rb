@@ -29,22 +29,28 @@ class Rental < ApplicationRecord
     end
   end
 
+  def checkin
 
-  def self.checkin!(customer_id, movie_id)
-    rental = Rental.find_by(customer_id: customer_id, movie_id: movie_id)
-    # movie = Movie.find_by(id: movie_id)
-
-    if Movie.find_by(id: movie_id) && Customer.find_by(id: customer_id)
-      transaction do
-
-        rental.movie.status = 'available'
-        rental.movie.increment!(:inventory)
-        rental.movie.save!
-      end
-      return rental
-    else
-      raise ArgumentError, "Invalid customer or movie id"
-    end
+    self.movie.status = 'available'
+    self.movie.increment!(:inventory)
+    self.movie.save!
 
   end
+  # def self.checkin!(customer_id, movie_id)
+  #   rental = Rental.find_by(customer_id: customer_id, movie_id: movie_id)
+  #   # movie = Movie.find_by(id: movie_id)
+  #
+  #   if Movie.find_by(id: movie_id) && Customer.find_by(id: customer_id)
+  #     transaction do
+  #
+  #       rental.movie.status = 'available'
+  #       rental.movie.increment!(:inventory)
+  #       rental.movie.save!
+  #     end
+  #     return rental
+  #   else
+  #     raise ArgumentError, "Invalid customer or movie id"
+  #   end
+  #
+  # end
 end

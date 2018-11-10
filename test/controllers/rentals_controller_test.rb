@@ -44,18 +44,18 @@ describe RentalsController do
 
     end
 
-    it 'has a working route'do
-      # rental_id = rentals(:one)[:id]
-
-      rental_params = {
-        customer_id: -1,
-        movie_id: -1
-      }
-
-      post rentals_checkin_path, { :params => rental_params }
-      must_respond_with :not_found
-
-    end
+    # it 'has a working route'do
+    #   rental_id = rentals(:one)[:id]
+    #
+    #   rental_params = {
+    #     customer_id: -1,
+    #     movie_id: -1
+    #   }
+    #
+    #   post rentals_checkin_path, { :params => rental_params }
+    #   must_respond_with :not_found
+    #
+    # end
 
 
     it "test" do
@@ -87,7 +87,8 @@ describe RentalsController do
       # rental.movie.status.must_equal 'unavailable'
 
       post rentals_checkin_path(rental.id), {:params => rental_params}
-      rental.movie.reload
+
+       rental.reload
 
       rental.movie.status.must_equal 'available'
     end
