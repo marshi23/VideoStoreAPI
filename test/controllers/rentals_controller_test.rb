@@ -80,16 +80,28 @@ describe RentalsController do
     it "tests check-in " do
       rental = rentals(:unavailable)
       rental_params = {
-        customer_id: customers(:one)[:id],
+        customer_id: customers(:two)[:id],
         movie_id: movies(:three)[:id]
       }
 
       # rental.movie.status.must_equal 'unavailable'
 
       post rentals_checkin_path(rental.id), {:params => rental_params}
-      rental.reload
+      rental.movie.reload
 
       rental.movie.status.must_equal 'available'
     end
 
+    it "adjusts inventory when a movie is checked out" do
+      rental = rentals(:one)
+      rental_params = {
+        customer_id: customers(:one)[:id],
+        movie_id: movies(:one)[:id]
+      }
+
+      post rentals_checkout_path(rental.id), {:params => rental_params}
+      rental.reload
+
+
+    end
 end

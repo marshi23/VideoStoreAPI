@@ -32,14 +32,14 @@ class Rental < ApplicationRecord
 
   def self.checkin!(customer_id, movie_id)
     rental = Rental.find_by(customer_id: customer_id, movie_id: movie_id)
-    movie = Movie.find_by(id: movie_id)
+    # movie = Movie.find_by(id: movie_id)
 
     if Movie.find_by(id: movie_id) && Customer.find_by(id: customer_id)
       transaction do
 
-        movie.status = 'available'
-        movie.increment!(:inventory)
-        movie.save!
+        rental.movie.status = 'available'
+        rental.movie.increment!(:inventory)
+        rental.movie.save!
       end
       return rental
     else
