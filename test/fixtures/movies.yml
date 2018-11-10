@@ -11,3 +11,10 @@ two:
   overview: The childhood friend claims the woman is heir to an incredible fortune, all paperwork has been taken care ofalready, all there's left to do is sign them. Distrustfulof both this situation and of this childhood friend, thewoman somewhat gladly agrees to the proposal, but there'sno time to waste, a decision had to be made quickly.
   release_date: 2012-09-25
   inventory: 2
+
+three:
+  title: Star Wars
+  overview: An incredible journey of a young man becoming a Jedi.
+  release_date: 1977-05-15
+  inventory: 5
+  status: unavailable

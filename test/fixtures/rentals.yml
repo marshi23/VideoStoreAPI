@@ -12,3 +12,9 @@ two:
   checkout_date: <%= Date.today %>
   customer: two
   movie: two
+
+unavailable:
+  checkin_date: 2018-10-04
+  checkout_date: 2018-10-03
+  customer: two
+  movie: three 

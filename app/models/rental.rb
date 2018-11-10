@@ -20,6 +20,7 @@ class Rental < ApplicationRecord
 
             rental.movie.decrement!(:inventory)
             rental.movie.status = 'unavailable'
+            rental.movie.save!
       end
       return rental
 
@@ -35,9 +36,10 @@ class Rental < ApplicationRecord
 
     if Movie.find_by(id: movie_id) && Customer.find_by(id: customer_id)
       transaction do
+
         movie.status = 'available'
-        rental.movie.increment!(:inventory)
-        rental.save!
+        movie.increment!(:inventory)
+        movie.save!
       end
       return rental
     else

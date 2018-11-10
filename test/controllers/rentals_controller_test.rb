@@ -39,47 +39,57 @@ describe RentalsController do
         movie_id: movies(:one)[:id]
       }
 
-      post rentals_checkin_path(rental_id), { :params => rental_params }
+      post rentals_checkin_path, { :params => rental_params }
       must_respond_with :success
 
     end
 
     it 'has a working route'do
-      rental_id = rentals(:one)[:id]
+      # rental_id = rentals(:one)[:id]
 
       rental_params = {
         customer_id: -1,
         movie_id: -1
       }
 
-      post rentals_checkin_path(rental_id), { :params => rental_params }
+      post rentals_checkin_path, { :params => rental_params }
       must_respond_with :not_found
 
     end
 
 
-    # it "test" do
-  #   rental = rentals(:one)
-  #   rental_params = {
-  #     customer_id: customers(:one)[:id],
-  #     movie_id: movies(:one)[:id]
-  #   }
-  #   # # rental_id = 1
-  #   # rental.movie.status.must_equal 'available'
-  #
-  #   # rental.movie.status
-  #   # binding.pry
-  #   # post checkout_path
-  #   #
-  #   # post rentals_checkout_path(rental.id), {:params => rental_params}
-  #
-  #   rental.checkout!(rental_params[:customer_id], rental_params[:movie_id])
-  #
-  # binding.pry
-  #
-  #
-  #   rental.movie.status.must_equal 'unavailable'
-    # end
+    it "test" do
+    rental = rentals(:one)
+    rental_params = {
+      customer_id: customers(:one)[:id],
+      movie_id: movies(:one)[:id]
+    }
+    # rental_id = 1
+    rental.movie.status.must_equal 'available'
+
+    rental.movie.status
+
+
+    post rentals_checkout_path(rental.id), {:params => rental_params}
+    rental.reload
+    # rental.checkout!(rental_params[:customer_id], rental_params[:movie_id])
+
+    rental.movie.status.must_equal 'unavailable'
+    end
   end
+    it "tests check-in " do
+      rental = rentals(:unavailable)
+      rental_params = {
+        customer_id: customers(:one)[:id],
+        movie_id: movies(:three)[:id]
+      }
+
+      # rental.movie.status.must_equal 'unavailable'
+
+      post rentals_checkin_path(rental.id), {:params => rental_params}
+      rental.reload
+
+      rental.movie.status.must_equal 'available'
+    end
 
 end
