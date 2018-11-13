@@ -44,20 +44,6 @@ describe RentalsController do
 
     end
 
-    # it 'has a working route'do
-    #   rental_id = rentals(:one)[:id]
-    #
-    #   rental_params = {
-    #     customer_id: -1,
-    #     movie_id: -1
-    #   }
-    #
-    #   post rentals_checkin_path, { :params => rental_params }
-    #   must_respond_with :not_found
-    #
-    # end
-
-
     it "test" do
     rental = rentals(:one)
     rental_params = {
@@ -103,6 +89,6 @@ describe RentalsController do
       post rentals_checkout_path(rental.id), {:params => rental_params}
       rental.reload
 
-
+    expect(rental.movie.inventory).must_equal 9
     end
 end
